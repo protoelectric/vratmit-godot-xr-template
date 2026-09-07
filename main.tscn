@@ -11,6 +11,7 @@
 [ext_resource type="Shader" uid="uid://c8oka6rh2sycb" path="res://assets/shaders/holo_fresnel.gdshader" id="9_holo"]
 [ext_resource type="Shader" uid="uid://dng7yarei1gge" path="res://assets/shaders/iridescent.gdshader" id="10_irid"]
 [ext_resource type="Script" uid="uid://u4v467pv0cty" path="res://scripts/xr_grab.gd" id="11_grab"]
+[ext_resource type="Script" uid="uid://cabtbicn2evsq" path="res://scripts/xr_move.gd" id="12_move"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_grab"]
 radius = 0.08
@@ -513,9 +514,9 @@ shader_parameter/pulse_length = 3.0
 shader_parameter/pulse_depth = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lts4m"]
-albedo_color = Color(0.39232534, 0.39232537, 0.39232534, 1)
+albedo_color = Color(0.7750634, 0.7750634, 0.7750634, 1)
 metallic = 1.0
-roughness = 0.2
+roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_prop"]
 material = SubResource("StandardMaterial3D_lts4m")
@@ -600,6 +601,12 @@ right_model = SubResource("PackedScene_4c57u")
 
 [node name="XRHands" type="Node3D" parent="XROrigin3D" unique_id=204813822]
 script = ExtResource("3_hnd0v")
+
+[node name="XRMovement" type="Node3D" parent="XROrigin3D" unique_id=57195040]
+script = ExtResource("12_move")
+camera = NodePath("../XRCamera3D")
+move_controller = NodePath("../XRControllerLeft")
+turn_controller = NodePath("../XRControllerRight")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=868570715]
 environment = SubResource("Environment_lts4m")

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cn5kxyuuli1wv"
-path="res://.godot/imported/quest_touch_plus_right.glb-fd5dc2aff8c2c3a2a46e397d3399a4af.scn"
+uid="uid://c0mv26qjq1r55"
+path="res://.godot/imported/quest_touch_plus_right.glb-1860cfd7133d4237f65834d3f28a8cc2.scn"
 
 [deps]
 
-source_file="res://models/quest_touch_plus_right.glb"
-dest_files=["res://.godot/imported/quest_touch_plus_right.glb-fd5dc2aff8c2c3a2a46e397d3399a4af.scn"]
+source_file="res://assets/models/controllers/quest_touch_plus_right.glb"
+dest_files=["res://.godot/imported/quest_touch_plus_right.glb-1860cfd7133d4237f65834d3f28a8cc2.scn"]
 
 [params]
 

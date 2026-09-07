@@ -1,3 +1,9 @@
+// TEMPLATE FILE #############################
+// Antialiasing is practically required in VR. This shader will fill in the floor
+// with a texture where lines are ALWAYS one pixel, no matter where they are.
+// This type of thing fights the jittery mess a traditional texture becomes at distance.
+//############################################
+
 shader_type spatial;
 
 uniform vec3 floor_color : source_color = vec3(0.10, 0.11, 0.13);

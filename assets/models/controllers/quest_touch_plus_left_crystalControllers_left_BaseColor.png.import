@@ -2,21 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8girmw0uhwmn"
-path.s3tc="res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-07d285cd8b4e437707b0bce01a63ca61.s3tc.ctex"
-path.etc2="res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-07d285cd8b4e437707b0bce01a63ca61.etc2.ctex"
+uid="uid://q20ptx0jejle"
+path.s3tc="res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-566cfc334f0a69befd719226620e75af.s3tc.ctex"
+path.etc2="res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-566cfc334f0a69befd719226620e75af.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "df90bebc3023a675a7898be53fd78b75"
-}
 
 [deps]
 
-source_file="res://models/quest_touch_plus_left_crystalControllers_left_BaseColor.png"
-dest_files=["res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-07d285cd8b4e437707b0bce01a63ca61.s3tc.ctex", "res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-07d285cd8b4e437707b0bce01a63ca61.etc2.ctex"]
+source_file="res://assets/models/controllers/quest_touch_plus_left_crystalControllers_left_BaseColor.png"
+dest_files=["res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-566cfc334f0a69befd719226620e75af.s3tc.ctex", "res://.godot/imported/quest_touch_plus_left_crystalControllers_left_BaseColor.png-566cfc334f0a69befd719226620e75af.etc2.ctex"]
 
 [params]
 

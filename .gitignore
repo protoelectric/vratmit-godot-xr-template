@@ -7,6 +7,9 @@
 # keystore
 export_credentials.cfg
 
+# build
+*.apk
+
 *.tmp
 
 # OS

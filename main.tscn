@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://c038dxexu2lhv" path="res://assets/models/controllers/quest_touch_plus_right_crystalControllers_right_BaseColor.png" id="4_5vw27"]
 [ext_resource type="Script" uid="uid://bkeashwobe3gi" path="res://scripts/xr_passthrough.gd" id="6_pass"]
 [ext_resource type="Shader" uid="uid://bdncegx70k5ge" path="res://assets/shaders/floor_grid.gdshader" id="7_grid"]
+[ext_resource type="Shader" uid="uid://bn7yhhjckof3j" path="res://assets/shaders/energy_grid.gdshader" id="8_egrid"]
+[ext_resource type="Shader" uid="uid://c8oka6rh2sycb" path="res://assets/shaders/holo_fresnel.gdshader" id="9_holo"]
+[ext_resource type="Shader" uid="uid://dng7yarei1gge" path="res://assets/shaders/iridescent.gdshader" id="10_irid"]
+[ext_resource type="Script" uid="uid://u4v467pv0cty" path="res://scripts/xr_grab.gd" id="11_grab"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_grab"]
+radius = 0.08
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_no7iy"]
 resource_name = "controllerMATphongLT"
@@ -479,7 +486,7 @@ shader_parameter/line_color = Color(0.3, 0.48, 0.68, 1)
 shader_parameter/cell_size = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
-size = Vector2(10, 10)
+size = Vector2(10.2, 10.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(10, 0.2, 10)
@@ -494,19 +501,39 @@ size = Vector3(1.2, 0.06, 0.7)
 [sub_resource type="BoxShape3D" id="BoxShape3D_table"]
 size = Vector3(1.2, 0.06, 0.7)
 
-[sub_resource type="StandardMaterial3D" id="Mat_red"]
-albedo_color = Color(0.46580058, 0.8205865, 0.76888007, 1)
-roughness = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prop_grid"]
+render_priority = 0
+shader = ExtResource("8_egrid")
+shader_parameter/base_color = Color(0.03, 0.04, 0.06, 1)
+shader_parameter/line_color = Color(0.2, 0.95, 0.7, 1)
+shader_parameter/cell_size = 0.03
+shader_parameter/glow = 2.5
+shader_parameter/pulse_speed = 1.5
+shader_parameter/pulse_length = 3.0
+shader_parameter/pulse_depth = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lts4m"]
+albedo_color = Color(0.39232534, 0.39232537, 0.39232534, 1)
+metallic = 1.0
+roughness = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_prop"]
+material = SubResource("StandardMaterial3D_lts4m")
 size = Vector3(0.09, 0.09, 0.09)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_prop"]
 size = Vector3(0.09, 0.09, 0.09)
 
-[sub_resource type="StandardMaterial3D" id="Mat_green"]
-albedo_color = Color(0.46666667, 0.81960785, 0.76862746, 1)
-roughness = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prop_holo"]
+render_priority = 0
+shader = ExtResource("9_holo")
+shader_parameter/glow_color = Color(0.35, 0.85, 1, 1)
+shader_parameter/rim_power = 2.0
+shader_parameter/brightness = 1.6
+shader_parameter/scan_density = 90.0
+shader_parameter/scan_speed = 0.35
+shader_parameter/scan_strength = 0.5
+shader_parameter/fill = 0.12
 
 [sub_resource type="SphereMesh" id="SphereMesh_prop"]
 radius = 0.05
@@ -515,9 +542,16 @@ height = 0.1
 [sub_resource type="SphereShape3D" id="SphereShape3D_prop"]
 radius = 0.05
 
-[sub_resource type="StandardMaterial3D" id="Mat_yellow"]
-albedo_color = Color(0.46666667, 0.81960785, 0.76862746, 1)
-roughness = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prop_irid"]
+render_priority = 0
+shader = ExtResource("10_irid")
+shader_parameter/base_color = Color(0.04, 0.04, 0.06, 1)
+shader_parameter/bands = 2.5
+shader_parameter/hue_shift = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/sheen = 0.8
+shader_parameter/metallic_amount = 0.5
+shader_parameter/roughness_amount = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_prop"]
 top_radius = 0.04
@@ -540,10 +574,22 @@ tracker = &"left_hand"
 pose = &"grip"
 show_when_tracked = true
 
+[node name="Grab" type="Area3D" parent="XROrigin3D/XRControllerLeft" unique_id=1060500629]
+script = ExtResource("11_grab")
+
+[node name="Shape" type="CollisionShape3D" parent="XROrigin3D/XRControllerLeft/Grab" unique_id=1281059357]
+shape = SubResource("SphereShape3D_grab")
+
 [node name="XRControllerRight" type="XRController3D" parent="XROrigin3D" unique_id=991621539]
 tracker = &"right_hand"
 pose = &"grip"
 show_when_tracked = true
+
+[node name="Grab" type="Area3D" parent="XROrigin3D/XRControllerRight" unique_id=1041043584]
+script = ExtResource("11_grab")
+
+[node name="Shape" type="CollisionShape3D" parent="XROrigin3D/XRControllerRight/Grab" unique_id=189537877]
+shape = SubResource("SphereShape3D_grab")
 
 [node name="XRVisuals" type="Node3D" parent="XROrigin3D" unique_id=1921252323]
 script = ExtResource("2_0xm2m")
@@ -587,7 +633,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.9, -0.6)
 
 [node name="Mesh" type="MeshInstance3D" parent="Props/Box" unique_id=1991983902]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.09934425)
-material_override = SubResource("Mat_red")
+material_override = SubResource("ShaderMaterial_prop_grid")
 mesh = SubResource("BoxMesh_prop")
 
 [node name="Collision" type="CollisionShape3D" parent="Props/Box" unique_id=64314266]
@@ -599,7 +645,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.6)
 
 [node name="Mesh" type="MeshInstance3D" parent="Props/Ball" unique_id=1380581418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.12304139)
-material_override = SubResource("Mat_green")
+material_override = SubResource("ShaderMaterial_prop_holo")
 mesh = SubResource("SphereMesh_prop")
 
 [node name="Collision" type="CollisionShape3D" parent="Props/Ball" unique_id=1357242908]
@@ -610,12 +656,22 @@ shape = SubResource("SphereShape3D_prop")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.95, -0.6)
 
 [node name="Mesh" type="MeshInstance3D" parent="Props/Pillar" unique_id=1505332721]
-material_override = SubResource("Mat_yellow")
+material_override = SubResource("ShaderMaterial_prop_irid")
 mesh = SubResource("CylinderMesh_prop")
 
 [node name="Collision" type="CollisionShape3D" parent="Props/Pillar" unique_id=1875812616]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0027546883)
 shape = SubResource("CylinderShape3D_prop")
+
+[node name="Box2" type="RigidBody3D" parent="Props" unique_id=1738426715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9039176, -0.71345115)
+
+[node name="Mesh" type="MeshInstance3D" parent="Props/Box2" unique_id=822659639]
+mesh = SubResource("BoxMesh_prop")
+
+[node name="Collision" type="CollisionShape3D" parent="Props/Box2" unique_id=47353824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0020998716)
+shape = SubResource("BoxShape3D_prop")
 
 [node name="SunLight" type="DirectionalLight3D" parent="." unique_id=1844096403]
 transform = Transform3D(0.86601907, -0.3535631, 0.35355926, 0, 0.70710295, 0.70711064, -0.500011, -0.61237127, 0.6123646, 0, 2.9986405, 0)
